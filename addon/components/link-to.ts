@@ -1,20 +1,22 @@
-//@ts-nocheck
-
 /**
 @module ember
 */
-import { alias, computed } from '@ember/-internals/metal';
-import { getOwner } from '@ember/-internals/owner';
-import RouterState from '@ember/-internals/routing/lib/system/router_state';
-import { isSimpleClick } from '@ember/-internals/views';
+import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { getOwner } from '@ember/application';
+import EmberComponent from '@ember/component';
 import { assert, deprecate, runInDebug, warn } from '@ember/debug';
-import { EngineInstance, getEngineParent } from '@ember/engine';
-import { flaggedInstrument } from '@ember/instrumentation';
+import { getEngineParent } from '@ember/engine';
+import EngineInstance from '@ember/engine/instance';
 import { inject as injectService } from '@ember/service';
 import { DEBUG } from '@glimmer/env';
-import EmberComponent from '../component';
+
+// private
+import RouterState from '@ember/-internals/routing/lib/system/router_state';
+import { isSimpleClick } from '@ember/-internals/views';
+import { flaggedInstrument } from '@ember/instrumentation';
+
 import { HAS_BLOCK } from '../component-managers/curly';
-import layout from '../templates/link-to';
 
 /**
   The `LinkTo` component renders a link to the supplied `routeName` passing an optionally
@@ -277,8 +279,6 @@ const UNDEFINED = Object.freeze({
 const EMPTY_QUERY_PARAMS = Object.freeze({});
 
 const LinkComponent = EmberComponent.extend({
-  layout,
-
   tagName: 'a',
 
   /**
