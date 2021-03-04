@@ -12,10 +12,11 @@ import {
   RouterNonApplicationTestCase,
   runTask,
 } from '@ember/test-helpers';
-import { Router, Route } from '@ember/-internals/routing';
+import Route from '@ember/routing/route';
+import Router from '@ember/routing/router';
 import Controller from '@ember/controller';
-import { set } from '@ember/-internals/metal';
-import { LinkComponent } from '@ember/-internals/glimmer';
+import { set } from '@ember/object';
+import LinkComponent from 'ember-legacy-built-in-components/components/link-to';
 
 moduleFor(
   '<LinkTo /> component (rendering tests)',

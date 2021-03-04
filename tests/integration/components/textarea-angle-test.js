@@ -12,7 +12,7 @@ import {
 
 import { action } from '@ember/object';
 import { assign } from '@ember/polyfills';
-import { set } from '@ember/-internals/metal';
+import { set } from '@ember/object';
 
 class TextAreaRenderingTest extends RenderingTestCase {
   assertTextArea({ attrs, value } = {}) {

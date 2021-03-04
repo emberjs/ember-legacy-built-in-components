@@ -1,10 +1,7 @@
 /* eslint-disable ember/no-new-mixins */
-/**
-@module ember
-*/
-
-import { get, set, Mixin } from '@ember/-internals/metal';
-import { TargetActionSupport } from '@ember/-internals/runtime';
+import { get, set } from '@ember/object';
+import Mixin from '@ember/object/mixin';
+import { TargetActionSupport } from './_target_action_support';
 import { deprecate } from '@ember/debug';
 import { SEND_ACTION } from '@ember/deprecated-features';
 import { MUTABLE_CELL } from '@ember/-internals/views';

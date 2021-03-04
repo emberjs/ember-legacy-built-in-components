@@ -1,6 +1,3 @@
-/**
-@module ember
-*/
 import { alias } from '@ember/object/computed';
 import { computed } from '@ember/object';
 import { getOwner } from '@ember/application';
@@ -10,13 +7,8 @@ import { getEngineParent } from '@ember/engine';
 import EngineInstance from '@ember/engine/instance';
 import { inject as injectService } from '@ember/service';
 import { DEBUG } from '@glimmer/env';
-
-// private
-import RouterState from '@ember/-internals/routing/lib/system/router_state';
-import { isSimpleClick } from '@ember/-internals/views';
-import { flaggedInstrument } from '@ember/instrumentation';
-
-import { HAS_BLOCK } from '../component-managers/curly';
+import { isSimpleClick } from './_internals';
+import { HAS_BLOCK } from './_internals';
 
 /**
   The `LinkTo` component renders a link to the supplied `routeName` passing an optionally
@@ -515,7 +507,7 @@ const LinkComponent = EmberComponent.extend({
     let { eventName } = this;
     this.on(eventName, this, this._invoke);
   },
-
+  //@ts-ignore
   _routing: injectService('-routing'),
   _currentRoute: alias('_routing.currentRouteName'),
   _currentRouterState: alias('_routing.currentState'),
@@ -526,6 +518,7 @@ const LinkComponent = EmberComponent.extend({
   }),
 
   _engineMountPoint: computed(function (this: any) {
+    //@ts-ignore
     return (getOwner(this) as EngineInstance).mountPoint;
   }),
 
@@ -658,7 +651,7 @@ const LinkComponent = EmberComponent.extend({
     }
   ),
 
-  _isActive(routerState: RouterState): boolean {
+  _isActive(routerState: any /* RouterState */): boolean {
     if (this.loading) {
       return false;
     }
@@ -785,16 +778,23 @@ const LinkComponent = EmberComponent.extend({
       routeName,
     };
 
-    flaggedInstrument(
-      'interaction.link-to',
+    // flaggedInstrument(
+    //   'interaction.link-to',
+    //   payload,
+    //   this._generateTransition(
+    //     payload,
+    //     routeName,
+    //     models,
+    //     queryParams,
+    //     shouldReplace
+    //   )
+    // );
+    this._generateTransition(
       payload,
-      this._generateTransition(
-        payload,
-        routeName,
-        models,
-        queryParams,
-        shouldReplace
-      )
+      routeName,
+      models,
+      queryParams,
+      shouldReplace
     );
     return false;
   },

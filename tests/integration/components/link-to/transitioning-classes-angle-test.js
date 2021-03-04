@@ -2,8 +2,8 @@
 /* eslint-disable ember/require-tagless-components */
 /* eslint-disable ember/no-classic-classes */
 /* eslint-disable ember/no-test-module-for */
-import { RSVP } from '@ember/-internals/runtime';
-import { Route } from '@ember/-internals/routing';
+import RSVP from 'rsvp';
+import Route from '@ember/routing/route';
 import { moduleFor, ApplicationTestCase, runTask } from '@ember/test-helpers';
 
 function assertHasClass(assert, selector, label) {

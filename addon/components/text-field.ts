@@ -1,11 +1,13 @@
+/* eslint-disable ember/no-mixins */
+/* eslint-disable ember/no-classic-classes */
 /**
 @module @ember/component
 */
-import { hasDOM } from '@ember/-internals/browser-environment';
-import { computed } from '@ember/-internals/metal';
-import { TextSupport } from '@ember/-internals/views';
-import Component from '../component';
-import layout from '../templates/empty';
+
+import hasDOM from './_has-dom';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
+import { TextSupport } from '../mixins/text-support';
 
 const inputTypes = hasDOM ? Object.create(null) : null;
 function canSetTypeOfInput(type: string): boolean {
@@ -46,8 +48,6 @@ function canSetTypeOfInput(type: string): boolean {
   @public
 */
 const TextField = Component.extend(TextSupport, {
-  layout,
-
   /**
     By default, this component will add the `ember-text-field` class to the component's element.
 
