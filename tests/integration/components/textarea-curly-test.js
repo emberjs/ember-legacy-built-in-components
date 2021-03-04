@@ -1,12 +1,21 @@
-import { RenderingTestCase, moduleFor, classes, applyMixins, runTask } from 'internal-test-helpers';
+import {
+  RenderingTestCase,
+  moduleFor,
+  classes,
+  applyMixins,
+  runTask,
+} from '@ember/test-helpers';
 
 import { action } from '@ember/object';
 import { assign } from '@ember/polyfills';
-import { set } from '@ember/-internals/metal';
+import { set } from '@ember/object';
 
 class TextAreaRenderingTest extends RenderingTestCase {
   assertTextArea({ attrs, value } = {}) {
-    let mergedAttrs = assign({ class: classes('ember-view ember-text-area') }, attrs);
+    let mergedAttrs = assign(
+      { class: classes('ember-view ember-text-area') },
+      attrs
+    );
     this.assertComponentElement(this.firstChild, {
       tagName: 'textarea',
       attrs: mergedAttrs,
@@ -113,7 +122,9 @@ moduleFor(
       runTask(() => set(this.context, 'model.val', 'Auckland'));
       this.assertTextArea({ value: 'Auckland' });
 
-      runTask(() => set(this.context, 'model', { val: 'A beautiful day in Seattle' }));
+      runTask(() =>
+        set(this.context, 'model', { val: 'A beautiful day in Seattle' })
+      );
       this.assertTextArea({ value: 'A beautiful day in Seattle' });
     }
 
@@ -159,11 +170,15 @@ moduleFor(
       });
       this.assertTextArea({ value: 'Boston' });
 
-      runTask(() => set(this.context, 'model', { val: 'A beautiful day in Seattle' }));
+      runTask(() =>
+        set(this.context, 'model', { val: 'A beautiful day in Seattle' })
+      );
       this.assertTextArea({ value: 'A beautiful day in Seattle' });
     }
 
-    ['@test triggers a method with `{{textarea key-up=this.didTrigger}}`'](assert) {
+    ['@test triggers a method with `{{textarea key-up=this.didTrigger}}`'](
+      assert
+    ) {
       this.render(`{{textarea key-up=this.didTrigger}}`, {
         didTrigger: action(function () {
           assert.ok(true, 'action was triggered');

@@ -1,12 +1,12 @@
+//@ts-check
 /* eslint-disable ember/no-component-lifecycle-hooks */
 /* eslint-disable ember/require-tagless-components */
 /* eslint-disable ember/no-classic-classes */
 /* eslint-disable ember/no-classic-components */
-import { set } from '@ember/-internals/metal';
+import { set } from '@ember/object';
 import { assert } from '@ember/debug';
 import { DEBUG } from '@glimmer/env';
 import EmberComponent from '@ember/component';
-import layout from '../templates/empty';
 
 /**
 @module @ember/component
@@ -32,12 +32,9 @@ import layout from '../templates/empty';
   properties will not be applied.
 
   @class Checkbox
-  @extends Component
   @public
 */
 const Checkbox = EmberComponent.extend({
-  layout,
-
   /**
     By default, this component will add the `ember-checkbox` class to the component's element.
 

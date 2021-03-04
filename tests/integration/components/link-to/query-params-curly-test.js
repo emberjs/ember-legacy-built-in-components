@@ -3,8 +3,8 @@
 /* eslint-disable ember/no-classic-classes */
 /* eslint-disable ember/no-test-module-for */
 import Controller from '@ember/controller';
-import { RSVP } from '@ember/-internals/runtime';
-import { Route } from '@ember/-internals/routing';
+import RSVP from 'rsvp';
+import Route from '@ember/routing/route';
 import { DEBUG } from '@glimmer/env';
 import {
   ApplicationTestCase,

@@ -3,6 +3,7 @@
 /* eslint-disable ember/no-classic-classes */
 /* eslint-disable ember/no-test-module-for */
 import {
+  compile,
   ApplicationTestCase,
   ModuleBasedTestResolver,
   moduleFor,
@@ -12,13 +13,14 @@ import {
   expectWarning,
 } from '@ember/test-helpers';
 import Controller, { inject as injectController } from '@ember/controller';
-import { A as emberA, RSVP } from '@ember/-internals/runtime';
-import { subscribe, reset } from '@ember/instrumentation';
-import { Route, NoneLocation } from '@ember/-internals/routing';
-import { EMBER_IMPROVED_INSTRUMENTATION } from '@ember/canary-features';
+import { A } from '@ember/array';
+import RSVP from 'rsvp';
+// import { subscribe, reset } from '@ember/instrumentation';
+import Route from '@ember/routing/route';
+import NoneLocation from '@ember/routing/none-location';
+// import { EMBER_IMPROVED_INSTRUMENTATION } from '@ember/canary-features';
 import Engine from '@ember/engine';
 import { DEBUG } from '@glimmer/env';
-import { compile } from '../../../utils/helpers';
 
 // IE includes the host name
 function normalizeUrl(url) {
@@ -914,140 +916,140 @@ moduleFor(
   }
 );
 
-if (EMBER_IMPROVED_INSTRUMENTATION) {
-  moduleFor(
-    'The {{link-to}} component with EMBER_IMPROVED_INSTRUMENTATION',
-    class extends ApplicationTestCase {
-      constructor() {
-        super();
+// if (EMBER_IMPROVED_INSTRUMENTATION) {
+//   moduleFor(
+//     'The {{link-to}} component with EMBER_IMPROVED_INSTRUMENTATION',
+//     class extends ApplicationTestCase {
+//       constructor() {
+//         super();
 
-        this.router.map(function () {
-          this.route('about');
-        });
+//         this.router.map(function () {
+//           this.route('about');
+//         });
 
-        this.addTemplate(
-          'index',
-          `
-          <h3 class="home">Home</h3>
-          <div id="about-link">{{#link-to route='about'}}About{{/link-to}}</div>
-          <div id="self-link">{{#link-to route='index'}}Self{{/link-to}}</div>
-          `
-        );
-        this.addTemplate(
-          'about',
-          `
-          <h3 class="about">About</h3>
-          <div id="home-link">{{#link-to route='index'}}Home{{/link-to}}</div>
-          <div id="self-link">{{#link-to route='about'}}Self{{/link-to}}</div>
-          `
-        );
-      }
+//         this.addTemplate(
+//           'index',
+//           `
+//           <h3 class="home">Home</h3>
+//           <div id="about-link">{{#link-to route='about'}}About{{/link-to}}</div>
+//           <div id="self-link">{{#link-to route='index'}}Self{{/link-to}}</div>
+//           `
+//         );
+//         this.addTemplate(
+//           'about',
+//           `
+//           <h3 class="about">About</h3>
+//           <div id="home-link">{{#link-to route='index'}}Home{{/link-to}}</div>
+//           <div id="self-link">{{#link-to route='about'}}Self{{/link-to}}</div>
+//           `
+//         );
+//       }
 
-      beforeEach() {
-        return this.visit('/');
-      }
+//       beforeEach() {
+//         return this.visit('/');
+//       }
 
-      afterEach() {
-        reset();
+//       afterEach() {
+//         reset();
 
-        return super.afterEach();
-      }
+//         return super.afterEach();
+//       }
 
-      async ['@test it fires an interaction event'](assert) {
-        let before = 0;
-        let after = 0;
+//       async ['@test it fires an interaction event'](assert) {
+//         let before = 0;
+//         let after = 0;
 
-        subscribe('interaction.link-to', {
-          before() {
-            before++;
-          },
-          after() {
-            after++;
-          },
-        });
+//         subscribe('interaction.link-to', {
+//           before() {
+//             before++;
+//           },
+//           after() {
+//             after++;
+//           },
+//         });
 
-        assert.strictEqual(
-          before,
-          0,
-          'instrumentation subscriber (before) was not called'
-        );
-        assert.strictEqual(
-          after,
-          0,
-          'instrumentation subscriber (after) was not called'
-        );
+//         assert.strictEqual(
+//           before,
+//           0,
+//           'instrumentation subscriber (before) was not called'
+//         );
+//         assert.strictEqual(
+//           after,
+//           0,
+//           'instrumentation subscriber (after) was not called'
+//         );
 
-        await this.click('#about-link > a');
+//         await this.click('#about-link > a');
 
-        assert.strictEqual(
-          before,
-          1,
-          'instrumentation subscriber (before) was called'
-        );
-        assert.strictEqual(
-          after,
-          1,
-          'instrumentation subscriber (after) was called'
-        );
-      }
+//         assert.strictEqual(
+//           before,
+//           1,
+//           'instrumentation subscriber (before) was called'
+//         );
+//         assert.strictEqual(
+//           after,
+//           1,
+//           'instrumentation subscriber (after) was called'
+//         );
+//       }
 
-      async ['@test it interaction event includes the route name and transition object'](
-        assert
-      ) {
-        let before = 0;
-        let after = 0;
+//       async ['@test it interaction event includes the route name and transition object'](
+//         assert
+//       ) {
+//         let before = 0;
+//         let after = 0;
 
-        subscribe('interaction.link-to', {
-          before(name, timestamp, { routeName }) {
-            before++;
-            assert.equal(
-              routeName,
-              'about',
-              'instrumentation subscriber was passed route name'
-            );
-          },
-          after(name, timestamp, { routeName, transition }) {
-            after++;
-            assert.equal(
-              routeName,
-              'about',
-              'instrumentation subscriber was passed route name'
-            );
-            assert.equal(
-              transition.targetName,
-              'about',
-              'instrumentation subscriber was passed transition object in the after hook'
-            );
-          },
-        });
+//         subscribe('interaction.link-to', {
+//           before(name, timestamp, { routeName }) {
+//             before++;
+//             assert.equal(
+//               routeName,
+//               'about',
+//               'instrumentation subscriber was passed route name'
+//             );
+//           },
+//           after(name, timestamp, { routeName, transition }) {
+//             after++;
+//             assert.equal(
+//               routeName,
+//               'about',
+//               'instrumentation subscriber was passed route name'
+//             );
+//             assert.equal(
+//               transition.targetName,
+//               'about',
+//               'instrumentation subscriber was passed transition object in the after hook'
+//             );
+//           },
+//         });
 
-        assert.strictEqual(
-          before,
-          0,
-          'instrumentation subscriber (before) was not called'
-        );
-        assert.strictEqual(
-          after,
-          0,
-          'instrumentation subscriber (after) was not called'
-        );
+//         assert.strictEqual(
+//           before,
+//           0,
+//           'instrumentation subscriber (before) was not called'
+//         );
+//         assert.strictEqual(
+//           after,
+//           0,
+//           'instrumentation subscriber (after) was not called'
+//         );
 
-        await this.click('#about-link > a');
+//         await this.click('#about-link > a');
 
-        assert.strictEqual(
-          before,
-          1,
-          'instrumentation subscriber (before) was called'
-        );
-        assert.strictEqual(
-          after,
-          1,
-          'instrumentation subscriber (after) was called'
-        );
-      }
-    }
-  );
-}
+//         assert.strictEqual(
+//           before,
+//           1,
+//           'instrumentation subscriber (before) was called'
+//         );
+//         assert.strictEqual(
+//           after,
+//           1,
+//           'instrumentation subscriber (after) was called'
+//         );
+//       }
+//     }
+//   );
+// }
 
 moduleFor(
   'The {{link-to}} component - nested routes and link-to arguments',

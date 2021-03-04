@@ -1,6 +1,7 @@
 /* eslint-disable ember/no-jquery */
 /* eslint-disable ember/no-test-module-for */
 import {
+  compile,
   ApplicationTestCase,
   ModuleBasedTestResolver,
   moduleFor,
@@ -10,13 +11,14 @@ import {
   expectWarning,
 } from '@ember/test-helpers';
 import Controller, { inject as injectController } from '@ember/controller';
-import { A as emberA, RSVP } from '@ember/-internals/runtime';
+import { A as emberA } from '@ember/array';
+import RSVP from 'rsvp';
 import { subscribe, reset } from '@ember/instrumentation';
-import { Route, NoneLocation } from '@ember/-internals/routing';
-import { EMBER_IMPROVED_INSTRUMENTATION } from '@ember/canary-features';
+import Route from '@ember/routing/route';
+import NoneLocation from '@ember/routing/none-location';
+// import { EMBER_IMPROVED_INSTRUMENTATION } from '@ember/canary-features';
 import Engine from '@ember/engine';
 import { DEBUG } from '@glimmer/env';
-import { compile } from '../../../utils/helpers';
 
 // IE includes the host name
 function normalizeUrl(url) {
@@ -864,140 +866,140 @@ moduleFor(
   }
 );
 
-if (EMBER_IMPROVED_INSTRUMENTATION) {
-  moduleFor(
-    'The <LinkTo /> component with EMBER_IMPROVED_INSTRUMENTATION',
-    class extends ApplicationTestCase {
-      constructor() {
-        super();
+// if (EMBER_IMPROVED_INSTRUMENTATION) {
+//   moduleFor(
+//     'The <LinkTo /> component with EMBER_IMPROVED_INSTRUMENTATION',
+//     class extends ApplicationTestCase {
+//       constructor() {
+//         super();
 
-        this.router.map(function () {
-          this.route('about');
-        });
+//         this.router.map(function () {
+//           this.route('about');
+//         });
 
-        this.addTemplate(
-          'index',
-          `
-          <h3 class="home">Home</h3>
-          <LinkTo id='about-link' @route='about'>About</LinkTo>
-          <LinkTo id='self-link' @route='index'>Self</LinkTo>
-          `
-        );
-        this.addTemplate(
-          'about',
-          `
-          <h3 class="about">About</h3>
-          <LinkTo id='home-link' @route='index'>Home</LinkTo>
-          <LinkTo id='self-link' @route='about'>Self</LinkTo>
-          `
-        );
-      }
+//         this.addTemplate(
+//           'index',
+//           `
+//           <h3 class="home">Home</h3>
+//           <LinkTo id='about-link' @route='about'>About</LinkTo>
+//           <LinkTo id='self-link' @route='index'>Self</LinkTo>
+//           `
+//         );
+//         this.addTemplate(
+//           'about',
+//           `
+//           <h3 class="about">About</h3>
+//           <LinkTo id='home-link' @route='index'>Home</LinkTo>
+//           <LinkTo id='self-link' @route='about'>Self</LinkTo>
+//           `
+//         );
+//       }
 
-      beforeEach() {
-        return this.visit('/');
-      }
+//       beforeEach() {
+//         return this.visit('/');
+//       }
 
-      afterEach() {
-        reset();
+//       afterEach() {
+//         reset();
 
-        return super.afterEach();
-      }
+//         return super.afterEach();
+//       }
 
-      async ['@test it fires an interaction event'](assert) {
-        let before = 0;
-        let after = 0;
+//       async ['@test it fires an interaction event'](assert) {
+//         let before = 0;
+//         let after = 0;
 
-        subscribe('interaction.link-to', {
-          before() {
-            before++;
-          },
-          after() {
-            after++;
-          },
-        });
+//         subscribe('interaction.link-to', {
+//           before() {
+//             before++;
+//           },
+//           after() {
+//             after++;
+//           },
+//         });
 
-        assert.strictEqual(
-          before,
-          0,
-          'instrumentation subscriber (before) was not called'
-        );
-        assert.strictEqual(
-          after,
-          0,
-          'instrumentation subscriber (after) was not called'
-        );
+//         assert.strictEqual(
+//           before,
+//           0,
+//           'instrumentation subscriber (before) was not called'
+//         );
+//         assert.strictEqual(
+//           after,
+//           0,
+//           'instrumentation subscriber (after) was not called'
+//         );
 
-        await this.click('#about-link');
+//         await this.click('#about-link');
 
-        assert.strictEqual(
-          before,
-          1,
-          'instrumentation subscriber (before) was called'
-        );
-        assert.strictEqual(
-          after,
-          1,
-          'instrumentation subscriber (after) was called'
-        );
-      }
+//         assert.strictEqual(
+//           before,
+//           1,
+//           'instrumentation subscriber (before) was called'
+//         );
+//         assert.strictEqual(
+//           after,
+//           1,
+//           'instrumentation subscriber (after) was called'
+//         );
+//       }
 
-      async ['@test it interaction event includes the route name and transition object'](
-        assert
-      ) {
-        let before = 0;
-        let after = 0;
+//       async ['@test it interaction event includes the route name and transition object'](
+//         assert
+//       ) {
+//         let before = 0;
+//         let after = 0;
 
-        subscribe('interaction.link-to', {
-          before(name, timestamp, { routeName }) {
-            before++;
-            assert.equal(
-              routeName,
-              'about',
-              'instrumentation subscriber was passed route name'
-            );
-          },
-          after(name, timestamp, { routeName, transition }) {
-            after++;
-            assert.equal(
-              routeName,
-              'about',
-              'instrumentation subscriber was passed route name'
-            );
-            assert.equal(
-              transition.targetName,
-              'about',
-              'instrumentation subscriber was passed transition object in the after hook'
-            );
-          },
-        });
+//         subscribe('interaction.link-to', {
+//           before(name, timestamp, { routeName }) {
+//             before++;
+//             assert.equal(
+//               routeName,
+//               'about',
+//               'instrumentation subscriber was passed route name'
+//             );
+//           },
+//           after(name, timestamp, { routeName, transition }) {
+//             after++;
+//             assert.equal(
+//               routeName,
+//               'about',
+//               'instrumentation subscriber was passed route name'
+//             );
+//             assert.equal(
+//               transition.targetName,
+//               'about',
+//               'instrumentation subscriber was passed transition object in the after hook'
+//             );
+//           },
+//         });
 
-        assert.strictEqual(
-          before,
-          0,
-          'instrumentation subscriber (before) was not called'
-        );
-        assert.strictEqual(
-          after,
-          0,
-          'instrumentation subscriber (after) was not called'
-        );
+//         assert.strictEqual(
+//           before,
+//           0,
+//           'instrumentation subscriber (before) was not called'
+//         );
+//         assert.strictEqual(
+//           after,
+//           0,
+//           'instrumentation subscriber (after) was not called'
+//         );
 
-        await this.click('#about-link');
+//         await this.click('#about-link');
 
-        assert.strictEqual(
-          before,
-          1,
-          'instrumentation subscriber (before) was called'
-        );
-        assert.strictEqual(
-          after,
-          1,
-          'instrumentation subscriber (after) was called'
-        );
-      }
-    }
-  );
-}
+//         assert.strictEqual(
+//           before,
+//           1,
+//           'instrumentation subscriber (before) was called'
+//         );
+//         assert.strictEqual(
+//           after,
+//           1,
+//           'instrumentation subscriber (after) was called'
+//         );
+//       }
+//     }
+//   );
+// }
 
 moduleFor(
   'The <LinkTo /> component - nested routes and link-to arguments',
