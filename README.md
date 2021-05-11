@@ -1,4 +1,4 @@
-ember-legacy-built-in-components
+@ember/legacy-built-in-components
 ==============================================================================
 
 Provides the legacy implementation of the `Checkbox`, `LinkComponent`,
@@ -18,7 +18,7 @@ Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install ember-legacy-built-in-components
+ember install @ember/legacy-built-in-components
 ```
 
 
@@ -31,12 +31,12 @@ import {
   LinkComponent,
   TextArea,
   TextField
-} from 'ember-legacy-built-in-components';
+} from '@ember/legacy-built-in-components';
 
 export const MyCheckbox = Checkbox.extend({ ... });
-export const MyLinkComponent = LinkComponent.extend({ ... });
-export const TextArea = TextArea.extend({ ... });
-export const TextField = TextField.extend({ ... });
+export const MyLink = LinkComponent.extend({ ... });
+export const MyTextArea = TextArea.extend({ ... });
+export const MyTextField = TextField.extend({ ... });
 ```
 
 Contributing
