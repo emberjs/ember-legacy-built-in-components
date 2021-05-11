@@ -1,8 +1,10 @@
 ember-legacy-built-in-components
 ==============================================================================
 
-[Short description of the addon.]
+Provides the legacy implementation of the `Checkbox`, `LinkComponent`,
+`TextArea` and `TextField` component classes as specified in [RFC #671][rfc].
 
+[rfc]: https://github.com/emberjs/rfcs/blob/master/text/0671-modernize-built-in-components-1.md
 
 Compatibility
 ------------------------------------------------------------------------------
@@ -23,8 +25,19 @@ ember install ember-legacy-built-in-components
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+```js
+import {
+  Checkbox,
+  LinkComponent,
+  TextArea,
+  TextField
+} from 'ember-legacy-built-in-components';
 
+export const MyCheckbox = Checkbox.extend({ ... });
+export const MyLinkComponent = LinkComponent.extend({ ... });
+export const TextArea = TextArea.extend({ ... });
+export const TextField = TextField.extend({ ... });
+```
 
 Contributing
 ------------------------------------------------------------------------------

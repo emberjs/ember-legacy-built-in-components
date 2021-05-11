@@ -1,13 +1,19 @@
 {
   "name": "ember-legacy-built-in-components",
   "version": "0.1.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Provides the legacy implementation of the `Checkbox`, `LinkComponent`, `TextArea` and `TextField` component classes as specified in RFC #671.",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "homepage": "https://github.com/emberjs/ember-legacy-built-in-components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emberjs/ember-legacy-built-in-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/emberjs/ember-legacy-built-in-components/issues"
+  },
   "license": "MIT",
-  "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
