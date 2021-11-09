@@ -1,28 +1,73 @@
-name: Ember
-
-on: [pull_request]
+name: ember-legacy-built-in-components CI
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
-  build:
+  test:
+    name: Run Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 6
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node 14
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 14.x
+
+      - name: Node Modules Cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ci-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Run Tests
+        run: yarn test:ember
+        env:
+          CI: true
+
+  test-ember-try:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
 
     strategy:
       matrix:
-        node-version: [14.x]
+        ember-version:
+          [
+            ember-lts-3.20,
+            ember-lts-3.24,
+            ember-lts-3.28,
+            ember-beta,
+            ember-release,
+          ]
 
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node 14
+        uses: actions/setup-node@v2-beta
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install Dependencies
-        run: npm ci
-      - name: JavaScript Linting
-        run: npm run lint:js
-      - name: Template Linting
-        run: npm run lint:hbs
-      - name: npm test
-        run: npm test
-        env:
-          CI: true
+          node-version: 14.x
+
+      - name: Node Modules Cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ci-yarn-${{ matrix.ember-version }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install
+        run: yarn install --frozen-lockfile --ignore-engines
+
+      - name: Run Tests
+        run: node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup
