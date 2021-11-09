@@ -2,9 +2,7 @@
   "name": "@ember/legacy-built-in-components",
   "version": "0.2.0",
   "description": "Provides the legacy implementation of the `Checkbox`, `LinkComponent`, `TextArea` and `TextField` component classes as specified in RFC #671.",
-  "keywords": [
-    "ember-addon"
-  ],
+  "keywords": ["ember-addon"],
   "homepage": "https://github.com/emberjs/ember-legacy-built-in-components",
   "repository": {
     "type": "git",
@@ -27,7 +25,7 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
-    "test": "npm-run-all lint test:*",
+    "test": "npm-run-all test:*",
     "test:ember": "ember test",
     "test:ember-compatibility": "ember try:each"
   },
