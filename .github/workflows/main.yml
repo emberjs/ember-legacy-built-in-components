@@ -42,14 +42,7 @@ jobs:
 
     strategy:
       matrix:
-        ember-version:
-          [
-            ember-lts-3.20,
-            ember-lts-3.24,
-            ember-lts-3.28,
-            ember-beta,
-            ember-release,
-          ]
+        ember-version: [ember-vendored-pr-19806, ember-lts-3.28]
 
     steps:
       - name: Checkout
