@@ -1,0 +1,28 @@
+name: Ember
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Dependencies
+        run: npm ci
+      - name: JavaScript Linting
+        run: npm run lint:js
+      - name: Template Linting
+        run: npm run lint:hbs
+      - name: npm test
+        run: npm test
+        env:
+          CI: true
