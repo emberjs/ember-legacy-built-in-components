@@ -1,1 +1,1 @@
-export { default } from 'ember-legacy-built-in-components/components/link-to';
+export { default } from '@ember/legacy-built-in-components/components/link-to';

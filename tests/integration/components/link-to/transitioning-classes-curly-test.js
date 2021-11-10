@@ -4,7 +4,8 @@
 /* eslint-disable ember/no-test-module-for */
 import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
-import { moduleFor, ApplicationTestCase, runTask } from '@ember/test-helpers';
+import { moduleFor, runTask } from '@ember/test-helpers';
+import ApplicationTestCase from '../../../helpers/ember-internal-test-helpers/test-cases/application';
 
 function assertHasClass(assert, selector, label) {
   let testLabel = `${selector.attr('id')} should have class ${label}`;

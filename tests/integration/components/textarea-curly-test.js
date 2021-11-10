@@ -1,10 +1,5 @@
-import {
-  RenderingTestCase,
-  moduleFor,
-  classes,
-  applyMixins,
-  runTask,
-} from '@ember/test-helpers';
+import { moduleFor, classes, applyMixins, runTask } from '@ember/test-helpers';
+import RenderingTestCase from '../../../helpers/ember-internal-test-helpers/test-cases/rendering';
 
 import { action } from '@ember/object';
 import { assign } from '@ember/polyfills';

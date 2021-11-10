@@ -7,7 +7,6 @@ import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
 import { DEBUG } from '@glimmer/env';
 import {
-  ApplicationTestCase,
   classes as classMatcher,
   moduleFor,
   runTask,
@@ -15,6 +14,7 @@ import {
   expectDeprecation,
   expectDeprecationAsync,
 } from '@ember/test-helpers';
+import ApplicationTestCase from '../../../helpers/ember-internal-test-helpers/test-cases/application';
 
 moduleFor(
   '{{link-to}} component with query-params (rendering)',

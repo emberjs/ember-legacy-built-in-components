@@ -7,16 +7,16 @@
 /* eslint-disable ember/no-test-module-for */
 import {
   moduleFor,
-  ApplicationTestCase,
   RenderingTestCase,
   RouterNonApplicationTestCase,
   runTask,
 } from '@ember/test-helpers';
+import ApplicationTestCase from '../../../helpers/ember-internal-test-helpers/test-cases/application';
 import Route from '@ember/routing/route';
 import Router from '@ember/routing/router';
 import Controller from '@ember/controller';
 import { set } from '@ember/object';
-import LinkComponent from 'ember-legacy-built-in-components/components/link-to';
+import LinkComponent from '@ember/legacy-built-in-components/components/link-to';
 
 moduleFor(
   '<LinkTo /> component (rendering tests)',

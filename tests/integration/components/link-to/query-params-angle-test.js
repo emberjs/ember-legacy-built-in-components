@@ -6,12 +6,12 @@ import Controller from '@ember/controller';
 import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
 import {
-  ApplicationTestCase,
   classes as classMatcher,
   moduleFor,
   runTask,
   runLoopSettled,
 } from '@ember/test-helpers';
+import ApplicationTestCase from '../../../helpers/ember-internal-test-helpers/test-cases/application';
 
 moduleFor(
   '<LinkTo /> component with query-params (rendering)',

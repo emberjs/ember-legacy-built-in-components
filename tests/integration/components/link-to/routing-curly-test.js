@@ -4,7 +4,6 @@
 /* eslint-disable ember/no-test-module-for */
 import {
   compile,
-  ApplicationTestCase,
   ModuleBasedTestResolver,
   moduleFor,
   runTask,
@@ -12,6 +11,8 @@ import {
   expectDeprecationAsync,
   expectWarning,
 } from '@ember/test-helpers';
+import ApplicationTestCase from '../../../helpers/ember-internal-test-helpers/test-cases/application';
+
 import Controller, { inject as injectController } from '@ember/controller';
 import { A } from '@ember/array';
 import RSVP from 'rsvp';

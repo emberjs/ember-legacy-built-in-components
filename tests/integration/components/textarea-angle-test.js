@@ -2,13 +2,13 @@
 /* eslint-disable ember/no-test-module-for */
 /* eslint-disable ember/no-test-this-render */
 import {
-  RenderingTestCase,
   moduleFor,
   classes,
   applyMixins,
   runTask,
   expectAssertion,
 } from '@ember/test-helpers';
+import RenderingTestCase from '../../../helpers/ember-internal-test-helpers/test-cases/rendering';
 
 import { action } from '@ember/object';
 import { assign } from '@ember/polyfills';
