@@ -3,7 +3,7 @@
 /**
 @module @ember/component
 */
-import { TextSupport } from '../mixins/text-support';
+import TextSupport from '../mixins/text-support';
 import Component from '@ember/component';
 import layout from '../templates/empty';
 

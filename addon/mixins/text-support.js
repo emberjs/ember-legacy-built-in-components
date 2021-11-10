@@ -1,7 +1,7 @@
 /* eslint-disable ember/no-new-mixins */
 import { get, set } from '@ember/object';
 import Mixin from '@ember/object/mixin';
-import { TargetActionSupport } from './_target_action_support';
+import TargetActionSupport from './_target_action_support';
 import { deprecate } from '@ember/debug';
 import { SEND_ACTION } from '@ember/deprecated-features';
 import { MUTABLE_CELL } from '@ember/-internals/views';
@@ -325,8 +325,7 @@ function sendAction(eventName, view, event) {
     deprecate(message, false, {
       id: 'ember-component.send-action',
       until: '4.0.0',
-      url:
-        'https://emberjs.com/deprecations/v3.x#toc_ember-component-send-action',
+      url: 'https://emberjs.com/deprecations/v3.x#toc_ember-component-send-action',
       for: 'ember-source',
       since: {
         enabled: '3.4.0',

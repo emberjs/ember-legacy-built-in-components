@@ -7,7 +7,7 @@
 import hasDOM from './_has-dom';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
-import { TextSupport } from '../mixins/text-support';
+import TextSupport from '../mixins/text-support';
 
 const inputTypes = hasDOM ? Object.create(null) : null;
 function canSetTypeOfInput(type: string): boolean {
