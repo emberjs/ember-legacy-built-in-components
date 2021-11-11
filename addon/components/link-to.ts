@@ -306,6 +306,12 @@ const LinkComponent = EmberComponent.extend({
   'current-when': null,
 
   /**
+    @property disabledWhen
+    @public
+  */
+  disabledWhen: UNDEFINED,
+
+  /**
     Sets the `title` attribute of the `LinkComponent`'s HTML element.
 
     @property title
@@ -405,6 +411,12 @@ const LinkComponent = EmberComponent.extend({
     @private
   **/
   preventDefault: true,
+
+  /**
+    @property linkTitle
+    @private
+  */
+  linkTitle: UNDEFINED,
 
   /**
     By default this component will forward `href`, `title`, `rel`, `tabindex`, and `target`
@@ -508,7 +520,7 @@ const LinkComponent = EmberComponent.extend({
     this.on(eventName, this, this._invoke);
   },
   //@ts-ignore
-  _routing: injectService('-routing'),
+  _routing: injectService('-routing') as any,
   _currentRoute: alias('_routing.currentRouteName'),
   _currentRouterState: alias('_routing.currentState'),
   _targetRouterState: alias('_routing.targetState'),
@@ -520,7 +532,7 @@ const LinkComponent = EmberComponent.extend({
   _engineMountPoint: computed(function (this: any) {
     //@ts-ignore
     return (getOwner(this) as EngineInstance).mountPoint;
-  }),
+  }) as any,
 
   _route: computed(
     'route',
@@ -665,7 +677,7 @@ const LinkComponent = EmberComponent.extend({
     let { _models: models, _routing: routing } = this;
 
     if (typeof currentWhen === 'string') {
-      return currentWhen
+      return (currentWhen as string)
         .split(' ')
         .some((route) =>
           routing.isActiveForRoute(
@@ -728,7 +740,7 @@ const LinkComponent = EmberComponent.extend({
     @param {Event} event
     @private
   */
-  _invoke(this: any, event: Event): boolean {
+  _invoke(this: any, event: MouseEvent): boolean {
     if (!isSimpleClick(event)) {
       return true;
     }
@@ -868,7 +880,9 @@ const LinkComponent = EmberComponent.extend({
           return routing.generateURL(route, models, query);
         } catch (e) {
           // tslint:disable-next-line:max-line-length
-          e.message = `While generating link to route "${this.route}": ${e.message}`;
+          (e as Error).message = `While generating link to route "${
+            this.route
+          }": ${(e as Error).message}`;
           throw e;
         }
       } else {
@@ -877,6 +891,14 @@ const LinkComponent = EmberComponent.extend({
     }
   ),
 
+  /**
+    The loading state. Returns the loadingClass is true.
+
+    @property activeClass
+    @type {string|undefined}
+    @default active
+    @public
+  **/
   loading: computed(
     '_route',
     '_modelsAreLoaded',
@@ -888,7 +910,7 @@ const LinkComponent = EmberComponent.extend({
         return this.loadingClass;
       }
     }
-  ),
+  ) as unknown as string,
 
   _modelsAreLoaded: computed(
     '_models',
@@ -924,6 +946,7 @@ const LinkComponent = EmberComponent.extend({
       this.set('disabled', disabledWhen);
     }
 
+    // @ts-ignore
     let { params } = this;
 
     if (!params || params.length === 0) {
@@ -947,7 +970,7 @@ const LinkComponent = EmberComponent.extend({
           lastModel.isQueryParams
         ) {
           this.query = lastModel.values;
-          models.pop();
+          (models as unknown as Array<any>).pop();
         }
       }
 
@@ -985,6 +1008,7 @@ const LinkComponent = EmberComponent.extend({
     this.set('models', params);
 
     runInDebug(() => {
+      // @ts-ignore
       params = this.params.slice();
 
       let equivalentNamedArgs = [];
@@ -1043,8 +1067,7 @@ const LinkComponent = EmberComponent.extend({
           id: 'ember-glimmer.link-to.positional-arguments',
           until: '4.0.0',
           for: 'ember-source',
-          url:
-            'https://deprecations.emberjs.com/v3.x#toc_ember-glimmer-link-to-positional-arguments',
+          url: 'https://deprecations.emberjs.com/v3.x#toc_ember-glimmer-link-to-positional-arguments',
           since: {
             enabled: '3.26.0-beta.1',
           },

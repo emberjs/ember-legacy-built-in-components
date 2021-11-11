@@ -30,6 +30,9 @@ jobs:
       # - name: Lint
       #   run: yarn lint
 
+      - name: TS precompile
+        run: yarn prepack
+
       - name: Run Tests
         run: yarn test:ember
         env:

@@ -1,25 +1,26 @@
 {
   "compilerOptions": {
+    // Compilation Configuration
     "target": "es2020",
-    "allowJs": true,
+
+    // Environment Configuration
+    "experimentalDecorators": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "noFallthroughCasesInSwitch": true,
+
+    // Enhance Strictness
+    "strict": true,
+    "noImplicitReturns": true,
+    "allowUnreachableCode": false,
+    "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noEmitOnError": false,
+
+    "newLine": "LF",
     "noEmit": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
+    "allowJs": true,
+
     "baseUrl": ".",
-    "module": "es6",
-    "experimentalDecorators": true,
+
     "paths": {
       "dummy/tests/*": ["tests/*"],
       "dummy/*": ["tests/dummy/app/*", "app/*"],
