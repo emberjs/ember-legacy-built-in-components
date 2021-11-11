@@ -8,15 +8,6 @@ module.exports = async function () {
     useYarn: true,
     scenarios: [
       {
-        name: 'ember-vendored-pr-19806',
-        npm: {
-          devDependencies: {
-            'ember-source':
-              'file:./ember-source-4.1.0-alpha.2.mixonic-drop-export-of-built-ins+5d24ae74.tgz',
-          },
-        },
-      },
-      {
         name: 'ember-lts-3.28',
         npm: {
           devDependencies: {
