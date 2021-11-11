@@ -7,7 +7,7 @@
 import hasDOM from './_has-dom';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
-import TextSupport from '../mixins/text-support';
+import TextSupportMixin from '../mixins/text-support';
 
 const inputTypes = hasDOM ? Object.create(null) : null;
 function canSetTypeOfInput(type: string): boolean {
@@ -47,7 +47,7 @@ function canSetTypeOfInput(type: string): boolean {
   @uses Ember.TextSupport
   @public
 */
-const TextField = Component.extend(TextSupport, {
+const TextField = Component.extend(TextSupportMixin, {
   /**
     By default, this component will add the `ember-text-field` class to the component's element.
 
