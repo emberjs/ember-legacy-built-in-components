@@ -1,27 +1,61 @@
 /* eslint-disable ember/new-module-imports */
 import Ember from 'ember';
-import { macroCondition, dependencySatisfies } from '@embroider/macros';
+import {
+  macroCondition,
+  dependencySatisfies,
+  importSync,
+} from '@embroider/macros';
 
-export const Checkbox = macroCondition(
-  dependencySatisfies('ember-source', '>= 3.27.0-beta.1')
-)
-  ? Ember._LegacyCheckbox.extend()
-  : Ember.Checkbox;
+let Checkbox;
+if (macroCondition(dependencySatisfies('ember-source', '>= v4.0.0-beta.9'))) {
+  Checkbox = importSync(
+    '@ember/legacy-built-in-components/components/checkbox'
+  ).default;
+} else if (
+  macroCondition(dependencySatisfies('ember-source', '>= 3.27.0-beta.1'))
+) {
+  Checkbox = Ember._LegacyCheckbox.extend();
+} else {
+  Checkbox = Ember.Checkbox;
+}
 
-export const TextField = macroCondition(
-  dependencySatisfies('ember-source', '>= 3.27.0-beta.1')
-)
-  ? Ember._LegacyTextField.extend()
-  : Ember.TextField;
+let LinkComponent;
+if (macroCondition(dependencySatisfies('ember-source', '>= v4.0.0-beta.9'))) {
+  LinkComponent = importSync(
+    '@ember/legacy-built-in-components/components/link-to'
+  ).default;
+} else if (
+  macroCondition(dependencySatisfies('ember-source', '>= 3.27.0-beta.1'))
+) {
+  LinkComponent = Ember._LegacyLinkComponent.extend();
+} else {
+  LinkComponent = Ember.LinkComponent;
+}
 
-export const TextArea = macroCondition(
-  dependencySatisfies('ember-source', '>= 3.27.0-beta.1')
-)
-  ? Ember._LegacyTextArea.extend()
-  : Ember.TextArea;
+let TextArea;
+if (macroCondition(dependencySatisfies('ember-source', '>= v4.0.0-beta.9'))) {
+  TextArea = importSync(
+    '@ember/legacy-built-in-components/components/textarea'
+  ).default;
+} else if (
+  macroCondition(dependencySatisfies('ember-source', '>= 3.27.0-beta.1'))
+) {
+  TextArea = Ember._LegacyTextArea.extend();
+} else {
+  TextArea = Ember.TextArea;
+}
 
-export const LinkComponent = macroCondition(
-  dependencySatisfies('ember-source', '>= 3.27.0-beta.1')
-)
-  ? Ember._LegacyLinkComponent.extend()
-  : Ember.LinkComponent;
+let TextField;
+if (macroCondition(dependencySatisfies('ember-source', '>= v4.0.0-beta.9'))) {
+  TextField = importSync(
+    '@ember/legacy-built-in-components/components/text-field'
+  ).default;
+} else if (
+  macroCondition(dependencySatisfies('ember-source', '>= 3.27.0-beta.1'))
+) {
+  TextField = Ember._LegacyTextField.extend();
+} else {
+  TextField = Ember.TextField;
+}
+
+export { Checkbox, LinkComponent, TextArea, TextField };
