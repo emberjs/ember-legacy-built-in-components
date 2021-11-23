@@ -1,1 +1,1 @@
-export { default } from '@ember/legacy-built-in-components/components/text-field';
+export { TextField as default } from '@ember/legacy-built-in-components';

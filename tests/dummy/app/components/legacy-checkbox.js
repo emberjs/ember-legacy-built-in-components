@@ -1,1 +1,1 @@
-export { default } from '@ember/legacy-built-in-components/components/checkbox';
+export { Checkbox as default } from '@ember/legacy-built-in-components';

@@ -1,1 +1,1 @@
-export { default } from '@ember/legacy-built-in-components/components/textarea';
+export { TextArea as default } from '@ember/legacy-built-in-components';

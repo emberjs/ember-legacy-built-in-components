@@ -1,1 +1,1 @@
-export { default } from '@ember/legacy-built-in-components/components/link-to';
+export { LinkComponent as default } from '@ember/legacy-built-in-components';
