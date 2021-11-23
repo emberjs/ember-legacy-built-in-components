@@ -26,4 +26,4 @@ For more information on using ember-cli, visit [https://ember-cli.com/](https://
 
 ## Making a release
 
-- `np`
+- `np --any-branch`
