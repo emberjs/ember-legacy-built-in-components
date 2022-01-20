@@ -39,7 +39,7 @@ const Checkbox = EmberComponent.extend({
     By default, this component will add the `ember-checkbox` class to the component's element.
 
     @property classNames
-    @type Array | String
+    @type Array<String> | String
     @default ['ember-checkbox']
     @public
    */
@@ -68,7 +68,7 @@ const Checkbox = EmberComponent.extend({
     `@checked` must be passed as named arguments, not attributes.
 
     @property attributeBindings
-    @type Array | String
+    @type Array<String> | String
     @default ['type', 'checked', 'indeterminate', 'disabled', 'tabindex', 'name', 'autofocus', 'required', 'form']
     @public
   */
