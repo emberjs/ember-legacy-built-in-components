@@ -1,36 +1,48 @@
 {
   "compilerOptions": {
-    // Compilation Configuration
     "target": "es2020",
-
-    // Environment Configuration
-    "experimentalDecorators": true,
+    "allowJs": true,
     "moduleResolution": "node",
-
-    // Enhance Strictness
-    "strict": true,
-    "noImplicitReturns": true,
-    "allowUnreachableCode": false,
-    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-
-    "newLine": "LF",
+    "noImplicitReturns": true,
+    "noEmitOnError": true,
     "noEmit": true,
-    "allowJs": true,
-
+    "inlineSourceMap": true,
+    "inlineSources": true,
     "baseUrl": ".",
-
+    "module": "es6",
+    "experimentalDecorators": true,
     "paths": {
-      "dummy/tests/*": ["tests/*"],
-      "dummy/*": ["tests/dummy/app/*", "app/*"],
-      "@ember/legacy-built-in-components": ["addon"],
-      "@ember/legacy-built-in-components/*": ["addon/*"],
-      "@ember/legacy-built-in-components/test-support": ["addon-test-support"],
+      "dummy/tests/*": [
+        "tests/*"
+      ],
+      "dummy/*": [
+        "tests/dummy/app/*",
+        "app/*"
+      ],
+      "@ember/legacy-built-in-components": [
+        "addon"
+      ],
+      "@ember/legacy-built-in-components/*": [
+        "addon/*"
+      ],
+      "@ember/legacy-built-in-components/test-support": [
+        "addon-test-support"
+      ],
       "@ember/legacy-built-in-components/test-support/*": [
         "addon-test-support/*"
       ],
-      "*": ["types/*"]
+      "*": [
+        "types/*"
+      ]
     }
   },
   "include": [
