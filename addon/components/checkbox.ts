@@ -112,6 +112,13 @@ const Checkbox = EmberComponent.extend({
   indeterminate: false,
 
   /**
+    @property checked
+    @default false
+    @private
+   */
+  checked: false,
+
+  /**
     Whenever the checkbox is inserted into the DOM, perform initialization steps, which include
     setting the indeterminate property if needed.
 
@@ -122,7 +129,7 @@ const Checkbox = EmberComponent.extend({
    */
   didInsertElement() {
     this._super(...arguments);
-    this.element.indeterminate = Boolean(this.indeterminate);
+    (this.element as any).indeterminate = Boolean(this.indeterminate);
   },
 
   /**
@@ -135,14 +142,14 @@ const Checkbox = EmberComponent.extend({
     @public
    */
   change() {
-    set(this, 'checked', this.element.checked);
+    set(this, 'checked', ((this.element as any).checked as boolean));
   },
 });
 
 if (DEBUG) {
   const UNSET = {};
 
-  Checkbox.reopen({
+  (Checkbox.reopen as any)({
     value: UNSET,
 
     didReceiveAttrs() {

@@ -962,7 +962,7 @@ const LinkComponent = EmberComponent.extend({
 
       let { _models: models } = this;
       if (models.length > 0) {
-        let lastModel = models[models.length - 1];
+        let lastModel = (models as unknown as Array<any>)[models.length - 1];
 
         if (
           typeof lastModel === 'object' &&
@@ -977,7 +977,7 @@ const LinkComponent = EmberComponent.extend({
       return;
     }
 
-    let hasBlock = this[HAS_BLOCK];
+    let hasBlock:boolean = (this as any)[HAS_BLOCK];
 
     params = params.slice();
 
@@ -1069,6 +1069,7 @@ const LinkComponent = EmberComponent.extend({
           for: 'ember-source',
           url: 'https://deprecations.emberjs.com/v3.x#toc_ember-glimmer-link-to-positional-arguments',
           since: {
+            available: '3.26.0-beta.1',
             enabled: '3.26.0-beta.1',
           },
         });

@@ -317,7 +317,7 @@ function sendAction(eventName, view, event) {
     action = get(view, eventName);
   }
 
-  let value = get(view, 'value');
+  let value = view.value;
 
   if (SEND_ACTION && typeof action === 'string') {
     let message = `Passing actions to components as strings (like \`<Input @${eventName}="${action}" />\`) is deprecated. Please use closure actions instead (\`<Input @${eventName}={{action "${action}"}} />\`).`;
@@ -340,7 +340,7 @@ function sendAction(eventName, view, event) {
     action(value, event);
   }
 
-  if (action && !get(view, 'bubbles')) {
+  if (action && !view.bubbles) {
     event.stopPropagation();
   }
 }
