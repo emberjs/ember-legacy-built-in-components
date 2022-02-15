@@ -13,10 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use Node 14
-        uses: actions/setup-node@v2-beta
-        with:
-          node-version: 14.x
+      - name: Use Volta
+        uses: volta-cli/action@v1
 
       - name: Node Modules Cache
         uses: actions/cache@v2
@@ -51,10 +49,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use Node 14
-        uses: actions/setup-node@v2-beta
-        with:
-          node-version: 14.x
+      - name: Use Volta
+        uses: volta-cli/action@v1
 
       - name: Node Modules Cache
         uses: actions/cache@v2
