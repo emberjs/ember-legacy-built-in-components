@@ -3,6 +3,8 @@
 # compiled output
 /dist/
 /tmp/
+/components/
+/mixins/
 
 # dependencies
 /bower_components/
