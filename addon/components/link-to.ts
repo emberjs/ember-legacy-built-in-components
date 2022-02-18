@@ -309,7 +309,7 @@ const LinkComponent = EmberComponent.extend({
     @property disabledWhen
     @public
   */
-  disabledWhen: UNDEFINED,
+  disabledWhen: undefined,
 
   /**
     Sets the `title` attribute of the `LinkComponent`'s HTML element.
@@ -820,14 +820,12 @@ const LinkComponent = EmberComponent.extend({
   ) {
     let { _routing: routing } = this;
 
-    return () => {
-      payload.transition = routing.transitionTo(
-        qualifiedRouteName,
-        models,
-        queryParams,
-        shouldReplace
-      );
-    };
+    payload.transition = routing.transitionTo(
+      qualifiedRouteName,
+      models,
+      queryParams,
+      shouldReplace
+    );
   },
 
   /**
