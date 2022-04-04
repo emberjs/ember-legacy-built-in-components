@@ -44,6 +44,16 @@ Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
+Releasing
+------------------------------------------------------------------------------
+
+
+```
+yarn
+yarn run test
+npx np --no-tests
+```
+
 
 License
 ------------------------------------------------------------------------------
