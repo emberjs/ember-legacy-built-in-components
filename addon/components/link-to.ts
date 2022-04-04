@@ -416,7 +416,7 @@ const LinkComponent = EmberComponent.extend({
     @property linkTitle
     @private
   */
-  linkTitle: UNDEFINED,
+  linkTitle: undefined,
 
   /**
     By default this component will forward `href`, `title`, `rel`, `tabindex`, and `target`
