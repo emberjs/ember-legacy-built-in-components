@@ -4,7 +4,6 @@
 @module ember
 */
 
-import { context } from '../components/_internals';
 import { get, computed } from '@ember/object';
 import Mixin from '@ember/object/mixin';
 import { assert } from '@ember/debug';
@@ -29,11 +28,7 @@ export default Mixin.create({
     let actionContext = get(this, 'actionContext');
 
     if (typeof actionContext === 'string') {
-      let value = get(this, actionContext);
-      if (value === undefined) {
-        value = get(context.lookup, actionContext);
-      }
-      return value;
+      return get(this, actionContext);
     } else {
       return actionContext;
     }
