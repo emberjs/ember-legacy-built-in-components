@@ -8,10 +8,10 @@ module.exports = async function () {
     useYarn: true,
     scenarios: [
       {
-        name: 'ember-lts-3.28',
+        name: 'ember-lts-4.8',
         npm: {
           devDependencies: {
-            'ember-source': '~3.28.0',
+            'ember-source': '~4.8.6',
           },
         },
       },
@@ -36,9 +36,12 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': await getChannelURL('canary'),
+            '@glint/template': '*',
           },
         },
       },
+      embroiderSafe(),
+      embroiderOptimized(),
     ],
   };
 };

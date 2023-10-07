@@ -43,7 +43,7 @@ jobs:
 
     strategy:
       matrix:
-        ember-version: [ember-beta, ember-lts-3.28]
+        ember-version: [ember-beta, ember-lts-4.8]
 
     steps:
       - name: Checkout
