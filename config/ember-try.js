@@ -36,7 +36,6 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': await getChannelURL('canary'),
-            '@glint/template': '*',
           },
         },
       },
