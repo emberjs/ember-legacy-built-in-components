@@ -2,8 +2,6 @@
 import { get, set } from '@ember/object';
 import Mixin from '@ember/object/mixin';
 import TargetActionSupport from './_target_action_support';
-import { deprecate } from '@ember/debug';
-import { SEND_ACTION } from '@ember/deprecated-features';
 import { MUTABLE_CELL } from '@ember/-internals/views';
 
 const KEY_EVENTS = {
@@ -319,24 +317,7 @@ function sendAction(eventName, view, event) {
 
   let value = view.value;
 
-  if (SEND_ACTION && typeof action === 'string') {
-    let message = `Passing actions to components as strings (like \`<Input @${eventName}="${action}" />\`) is deprecated. Please use closure actions instead (\`<Input @${eventName}={{action "${action}"}} />\`).`;
-
-    deprecate(message, false, {
-      id: 'ember-component.send-action',
-      until: '4.0.0',
-      url: 'https://emberjs.com/deprecations/v3.x#toc_ember-component-send-action',
-      for: 'ember-source',
-      since: {
-        enabled: '3.4.0',
-      },
-    });
-
-    view.triggerAction({
-      action: action,
-      actionContext: [value, event],
-    });
-  } else if (typeof action === 'function') {
+  if (typeof action === 'function') {
     action(value, event);
   }
 
