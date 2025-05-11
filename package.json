@@ -6,12 +6,12 @@
     "ember-addon"
   ],
   "homepage": "https://github.com/emberjs/ember-legacy-built-in-components",
+  "bugs": {
+    "url": "https://github.com/emberjs/ember-legacy-built-in-components/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emberjs/ember-legacy-built-in-components.git"
-  },
-  "bugs": {
-    "url": "https://github.com/emberjs/ember-legacy-built-in-components/issues"
   },
   "license": "MIT",
   "directories": {
@@ -98,20 +98,21 @@
     "prettier": "^2.4.0",
     "qunit": "^2.17.2",
     "qunit-dom": "^2.0.0",
+    "release-plan": "^0.16.0",
     "typescript": "^4.5.5",
     "webpack": "^5.52.1"
   },
   "engines": {
     "node": ">= 16"
   },
+  "volta": {
+    "node": "20.19.1",
+    "yarn": "1.22.22"
+  },
   "ember": {
     "edition": "octane"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
-  },
-  "volta": {
-    "node": "16.14.0",
-    "yarn": "1.22.17"
   }
 }
